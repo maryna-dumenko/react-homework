@@ -7,6 +7,11 @@ const alertsDOM = document.querySelector(".alerts-list");
 const AlertsListPortal = withPortal(alertsDOM)(AlertsList);
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+  }
+
   state = {
     value: "",
     alerts: []
@@ -17,7 +22,7 @@ export default class App extends Component {
   }
 
   setFocusInput = () => {
-    this.refs.AddForm.refs.myInput.focus();
+    this.inputRef.current.focus();
   };
 
   addAlert = message => {
@@ -38,7 +43,7 @@ export default class App extends Component {
     return (
       <div className="repos-container">
         <AddForm
-          ref="AddForm"
+          ref={this.inputRef}
           addAlert={this.addAlert}
           value={this.state.value}
           onChangeValue={this.onChangeValue}

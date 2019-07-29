@@ -1,22 +1,20 @@
-import React, { Component } from "react";
+import React, { forwardRef } from "react";
 
-export default class AddForm extends Component {
-  render() {
-    return (
-      <div>
-        <input
-          type="text"
-          value={this.props.value}
-          onChange={e => this.props.onChangeValue(e)}
-          ref="myInput"
-        />
-        <button
-          onClick={() => this.props.addAlert(this.props.value)}
-          disabled={!this.props.value}
-        >
-          Add Alert
-        </button>
-      </div>
-    );
-  }
-}
+const AddForm = forwardRef(({addAlert, value, onChangeValue}, ref) => (
+  <div>
+    <input
+      type="text"
+      value={value}
+      onChange={e => onChangeValue(e)}
+      ref={ref}
+    />
+    <button
+      onClick={() => addAlert(value)}
+      disabled={!value}
+    >
+      Add Alert
+    </button>
+  </div>
+));
+
+export default AddForm;
